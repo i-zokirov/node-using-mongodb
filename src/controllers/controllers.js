@@ -3,7 +3,15 @@ const productSchema = require('../models/model')
 
 const Product = mongoose.model('Product', productSchema)
 
-module.exports = addnewProduct = async() => {
+const addnewProduct = (req, res) => {
+    console.log(req.body)
     const newProduct = new Product(req.body)
-    await newProduct.save()
+    newProduct.save((err, Product) => {
+        if (err) {
+            res.send(err)
+        }
+        res.json(Product)
+    })
 }
+
+module.exports = { addnewProduct }

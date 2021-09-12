@@ -1,13 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path')
 const mongoose = require('mongoose')
 const productRoutes = require('./src/routes/routes')
 const app = express();
 const PORT = 3000;
 
 // bodyparser setup
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//body parser middleware
+app.use(express.urlencoded({ extended: true }))
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'views'))
 
 //DB connection using mongoose
 mongoose.connect('mongodb://localhost:27017/productsdb', {
